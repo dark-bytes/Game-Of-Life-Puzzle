@@ -1,29 +1,52 @@
 package com.gojek.bootcamp;
 
+import java.util.HashSet;
 import java.util.Set;
-// Represents cell in game
 
-public class Cell {
+// Represents cell in game of life
+
+class Cell {
     Coordinate point;
 
     Cell(Coordinate point) {
         this.point = point;
     }
 
-    boolean twoOrThreeAliveNeighbours(Set<Cell> aliveCells) {
-        Set<Coordinate> points = point.neighbourPoints();
-        int countAliveCells = countAliveNeighbours(points, aliveCells);
-        return (countAliveCells == 2 || countAliveCells == 3);
-    }
-
-    private int countAliveNeighbours(Set<Coordinate> points, Set<Cell> aliveCells) {
-        int count = 0;
-        for (Cell cell : aliveCells) {
-            if (points.contains(cell.point)) {
-                count++;
+    Set<Cell> generateNewCell(Set<Cell> aliveCells) {
+        Set<Coordinate> deadCells = deadCell(coordinatesOf(aliveCells));
+        Set<Cell> alive = new HashSet<>();
+        for (Coordinate deadCell : deadCells) {
+            if (threeAliveNeighbours(deadCell, aliveCells)) {
+                alive.add(new Cell(deadCell));
             }
         }
-        return count;
+        return alive;
+    }
+
+    boolean twoOrThreeAliveNeighbours(Set<Cell> alive) {
+        Set<Coordinate> points = point.neighbour();
+        points.retainAll(coordinatesOf(alive));
+        return (points.size() == 2 || points.size() == 3);
+    }
+
+    private boolean threeAliveNeighbours(Coordinate cell, Set<Cell> alive) {
+        Set<Coordinate> points = cell.neighbour();
+        points.retainAll(coordinatesOf(alive));
+        return points.size() == 3;
+    }
+
+    private Set<Coordinate> deadCell(Set<Coordinate> aliveCells) {
+        Set<Coordinate> points = point.neighbour();
+        points.removeAll(aliveCells);
+        return points;
+    }
+
+    private Set<Coordinate> coordinatesOf(Set<Cell> cells) {
+        Set<Coordinate> point = new HashSet<>();
+        for (Cell cell : cells) {
+            point.add(cell.point);
+        }
+        return point;
     }
 
     @Override
@@ -48,4 +71,5 @@ public class Cell {
                 "point=" + point +
                 '}';
     }
+
 }

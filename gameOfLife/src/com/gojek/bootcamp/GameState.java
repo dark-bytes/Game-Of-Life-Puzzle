@@ -4,7 +4,6 @@ package com.gojek.bootcamp;
     *Defines State of game
  */
 
-import java.util.ArrayList;
 import java.util.*;
 
 class GameState {
@@ -22,15 +21,10 @@ class GameState {
             if (cell.twoOrThreeAliveNeighbours(aliveCells)) {
                 next.aliveCells.add(cell);
             }
+            Set<Cell> newCell = cell.generateNewCell(aliveCells);
+            next.aliveCells.addAll(newCell);
         }
-        generateNewCell(next);
         return next;
-    }
-
-    private void generateNewCell(GameState next) {
-        for (Cell cell : aliveCells) {
-
-        }
     }
 
     @Override
@@ -48,5 +42,4 @@ class GameState {
                 "aliveCells=" + aliveCells +
                 '}';
     }
-
 }
