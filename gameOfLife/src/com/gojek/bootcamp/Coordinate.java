@@ -3,6 +3,8 @@ package com.gojek.bootcamp;
 import java.util.HashSet;
 import java.util.Set;
 
+//Stores Coordinate
+
 public class Coordinate {
     int x;
     int y;

@@ -1,6 +1,7 @@
 package com.gojek.bootcamp;
 
 import java.util.Set;
+// Represents cell in game
 
 public class Cell {
     Coordinate point;
