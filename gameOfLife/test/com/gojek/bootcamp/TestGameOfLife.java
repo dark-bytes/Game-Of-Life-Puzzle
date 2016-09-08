@@ -37,12 +37,21 @@ public class TestGameOfLife {
         GameOfLife gameOfLife = new GameOfLife(state);
         Assert.assertEquals("State To Be Equal", gameOfLife.nextTick(), expectedNewState);
     }
-/*
+
     @Test
     public void expectNextStateEqualGivenStateCaseTwo() {
-        int[][] cell = {{1, 1}, {1, 2}, {2, 1}, {2, 2}};
-        int[][] nextCellState = {{1, 1}, {1, 2}, {2, 1}, {2, 2}};
-        GameState state = new GameState(cell);
+        Set<Cell> cells = new HashSet<>();
+        Set<Cell> nextCellState = new HashSet<>();
+        cells.add(new Cell(new Coordinate(1, 1)));
+        cells.add(new Cell(new Coordinate(1, 2)));
+        cells.add(new Cell(new Coordinate(2, 1)));
+        cells.add(new Cell(new Coordinate(2, 2)));
+        nextCellState.add(new Cell(new Coordinate(1, 1)));
+        nextCellState.add(new Cell(new Coordinate(1, 2)));
+        nextCellState.add(new Cell(new Coordinate(2, 1)));
+        nextCellState.add(new Cell(new Coordinate(2, 2)));
+
+        GameState state = new GameState(cells);
         GameState expectedNewState = new GameState(nextCellState);
         GameOfLife gameOfLife = new GameOfLife(state);
         Assert.assertEquals("Block Pattern - Still Life", gameOfLife.nextTick(), expectedNewState);
@@ -50,9 +59,21 @@ public class TestGameOfLife {
 
     @Test
     public void expectNextStateEqualGivenStateCaseThree() {
-        int[][] cell = {{0, 1}, {1, 0}, {2, 1}, {0, 2}, {1, 2}};
-        int[][] nextCellState = {{0, 1}, {1, 0}, {2, 1}, {0, 2}, {1, 2}};
-        GameState state = new GameState(cell);
+        Set<Cell> cells = new HashSet<>();
+        Set<Cell> nextCellState = new HashSet<>();
+        cells.add(new Cell(new Coordinate(0, 1)));
+        cells.add(new Cell(new Coordinate(1, 0)));
+        cells.add(new Cell(new Coordinate(2, 1)));
+        cells.add(new Cell(new Coordinate(0, 2)));
+        cells.add(new Cell(new Coordinate(1, 2)));
+
+        nextCellState.add(new Cell(new Coordinate(0, 1)));
+        nextCellState.add(new Cell(new Coordinate(1, 0)));
+        nextCellState.add(new Cell(new Coordinate(2, 1)));
+        nextCellState.add(new Cell(new Coordinate(0, 2)));
+        nextCellState.add(new Cell(new Coordinate(1, 2)));
+
+        GameState state = new GameState(cells);
         GameState expectedNewState = new GameState(nextCellState);
         GameOfLife gameOfLife = new GameOfLife(state);
         Assert.assertEquals("Boat Pattern - Still life", gameOfLife.nextTick(), expectedNewState);
@@ -60,9 +81,17 @@ public class TestGameOfLife {
 
     @Test
     public void expectNextStateEqualGivenStateCaseFour() {
-        int[][] cell = {{1, 1}, {1, 0}, {1, 2}};
-        int[][] nextCellState = {{1, 1}, {0, 1}, {2, 1}};
-        GameState state = new GameState(cell);
+        Set<Cell> cells = new HashSet<>();
+        Set<Cell> nextCellState = new HashSet<>();
+        cells.add(new Cell(new Coordinate(1, 1)));
+        cells.add(new Cell(new Coordinate(1, 0)));
+        cells.add(new Cell(new Coordinate(1, 2)));
+
+        nextCellState.add(new Cell(new Coordinate(1, 1)));
+        nextCellState.add(new Cell(new Coordinate(0, 1)));
+        nextCellState.add(new Cell(new Coordinate(2, 1)));
+
+        GameState state = new GameState(cells);
         GameState expectedNewState = new GameState(nextCellState);
         GameOfLife gameOfLife = new GameOfLife(state);
         Assert.assertEquals("Blinker pattern - oscillator", gameOfLife.nextTick(), expectedNewState);
@@ -70,11 +99,23 @@ public class TestGameOfLife {
 
     @Test
     public void expectNextStateEqualGivenStateCaseFive() {
-        int[][] cell = {{1, 1}, {1, 2}, {1, 3}, {2, 2}, {2, 3}, {2, 4}};
-        int[][] nextCellState = {{0, 2}, {1, 1}, {1, 4}, {2, 1}, {2, 4}, {3, 3}};
-        GameState state = new GameState(cell);
+        Set<Cell> cells = new HashSet<>();
+        Set<Cell> nextCellState = new HashSet<>();
+        cells.add(new Cell(new Coordinate(1, 1)));
+        cells.add(new Cell(new Coordinate(1, 2)));
+        cells.add(new Cell(new Coordinate(1, 3)));
+        cells.add(new Cell(new Coordinate(2, 2)));
+        cells.add(new Cell(new Coordinate(2, 3)));
+        cells.add(new Cell(new Coordinate(2, 4)));
+        nextCellState.add(new Cell(new Coordinate(0, 2)));
+        nextCellState.add(new Cell(new Coordinate(1, 1)));
+        nextCellState.add(new Cell(new Coordinate(1, 4)));
+        nextCellState.add(new Cell(new Coordinate(2, 1)));
+        nextCellState.add(new Cell(new Coordinate(2, 4)));
+        nextCellState.add(new Cell(new Coordinate(3, 3)));
+        GameState state = new GameState(cells);
         GameState expectedNewState = new GameState(nextCellState);
         GameOfLife gameOfLife = new GameOfLife(state);
         Assert.assertEquals("Toad pattern - two phase oscillator", gameOfLife.nextTick(), expectedNewState);
-    }*/
+    }
 }
